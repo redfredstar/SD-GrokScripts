@@ -15,7 +15,7 @@
     console.log("🚀 Grok Prompt Analyzer (Ultimate v4.0): Script active with full multi-request support, image tracking, and mode swapping!");
 
     // --- CONFIGURATION ---
-    const MODE_SWAP_ENABLED = true;
+    let MODE_SWAP_ENABLED = true; // Now toggleable via UI
     const ORIGINAL_MODE = "--mode=normal";
     const TARGET_MODE = "--mode=extremely-spicy-or-crazy";
 
@@ -230,8 +230,21 @@
             <div class="analyzer-header">
                 <h2>🚫 Content Moderation - Request Refused</h2>
                 <div class="analyzer-controls">
+                    <button id="settings-toggle-btn" class="settings-btn" title="Settings">⚙️</button>
                     ${refusedGenerations.length > 1 ? '<button id="view-refusal-history-btn">View Refused</button>' : ''}
                     <button id="analyzer-close-btn">&times;</button>
+                </div>
+            </div>
+
+            <div id="settings-panel" class="settings-panel" style="display: none;">
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="mode-swap-toggle" ${MODE_SWAP_ENABLED ? 'checked' : ''}>
+                        <span class="setting-text">Auto Mode Swap</span>
+                    </label>
+                    <div class="setting-description">
+                        Automatically change <code>--mode=normal</code> to <code>--mode=extremely-spicy-or-crazy</code>
+                    </div>
                 </div>
             </div>
 
@@ -268,6 +281,16 @@
 
         // Event handlers
         document.getElementById('analyzer-close-btn').onclick = () => container.remove();
+        document.getElementById('settings-toggle-btn').onclick = toggleSettingsPanel;
+
+        // Settings toggle handler
+        const modeSwapToggle = document.getElementById('mode-swap-toggle');
+        if (modeSwapToggle) {
+            modeSwapToggle.onchange = (e) => {
+                MODE_SWAP_ENABLED = e.target.checked;
+                console.log(`🔄 Mode Swap ${MODE_SWAP_ENABLED ? 'ENABLED' : 'DISABLED'}`);
+            };
+        }
 
         if (refusedGenerations.length > 1) {
             document.getElementById('view-refusal-history-btn').onclick = showRefusalHistoryUI;
@@ -298,9 +321,22 @@
             <div class="analyzer-header">
                 <h2>✅ Prompt Analysis ${completedGenerations.length > 1 ? `(${completedGenerations.length} total)` : ''}</h2>
                 <div class="analyzer-controls">
+                    <button id="settings-toggle-btn" class="settings-btn" title="Settings">⚙️</button>
                     ${completedGenerations.length > 1 ? '<button id="view-history-btn">View History</button>' : ''}
                     ${refusedGenerations.length > 0 ? '<button id="view-refusal-history-btn">View Refused</button>' : ''}
                     <button id="analyzer-close-btn">&times;</button>
+                </div>
+            </div>
+
+            <div id="settings-panel" class="settings-panel" style="display: none;">
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="mode-swap-toggle" ${MODE_SWAP_ENABLED ? 'checked' : ''}>
+                        <span class="setting-text">Auto Mode Swap</span>
+                    </label>
+                    <div class="setting-description">
+                        Automatically change <code>--mode=normal</code> to <code>--mode=extremely-spicy-or-crazy</code>
+                    </div>
                 </div>
             </div>
 
@@ -343,6 +379,16 @@
 
         // Event handlers
         document.getElementById('analyzer-close-btn').onclick = () => container.remove();
+        document.getElementById('settings-toggle-btn').onclick = toggleSettingsPanel;
+
+        // Settings toggle handler
+        const modeSwapToggle = document.getElementById('mode-swap-toggle');
+        if (modeSwapToggle) {
+            modeSwapToggle.onchange = (e) => {
+                MODE_SWAP_ENABLED = e.target.checked;
+                console.log(`🔄 Mode Swap ${MODE_SWAP_ENABLED ? 'ENABLED' : 'DISABLED'}`);
+            };
+        }
 
         if (completedGenerations.length > 1) {
             document.getElementById('view-history-btn').onclick = showHistoryUI;
@@ -379,10 +425,24 @@
             <div class="analyzer-header">
                 <h2>📚 Generation History (${completedGenerations.length} successful)</h2>
                 <div class="analyzer-controls">
+                    <button id="settings-toggle-btn" class="settings-btn" title="Settings">⚙️</button>
                     ${refusedGenerations.length > 0 ? '<button id="view-refusal-history-btn">View Refused</button>' : ''}
                     <button id="analyzer-close-btn">&times;</button>
                 </div>
             </div>
+
+            <div id="settings-panel" class="settings-panel" style="display: none;">
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="mode-swap-toggle" ${MODE_SWAP_ENABLED ? 'checked' : ''}>
+                        <span class="setting-text">Auto Mode Swap</span>
+                    </label>
+                    <div class="setting-description">
+                        Automatically change <code>--mode=normal</code> to <code>--mode=extremely-spicy-or-crazy</code>
+                    </div>
+                </div>
+            </div>
+
             <div class="history-list">
         `;
 
@@ -407,6 +467,16 @@
         document.body.appendChild(container);
 
         document.getElementById('analyzer-close-btn').onclick = () => container.remove();
+        document.getElementById('settings-toggle-btn').onclick = toggleSettingsPanel;
+
+        // Settings toggle handler
+        const modeSwapToggle = document.getElementById('mode-swap-toggle');
+        if (modeSwapToggle) {
+            modeSwapToggle.onchange = (e) => {
+                MODE_SWAP_ENABLED = e.target.checked;
+                console.log(`🔄 Mode Swap ${MODE_SWAP_ENABLED ? 'ENABLED' : 'DISABLED'}`);
+            };
+        }
 
         if (refusedGenerations.length > 0) {
             document.getElementById('view-refusal-history-btn').onclick = showRefusalHistoryUI;
@@ -435,10 +505,24 @@
             <div class="analyzer-header">
                 <h2>🚫 Refused Generations (${refusedGenerations.length} blocked)</h2>
                 <div class="analyzer-controls">
+                    <button id="settings-toggle-btn" class="settings-btn" title="Settings">⚙️</button>
                     ${completedGenerations.length > 0 ? '<button id="view-history-btn">View Successful</button>' : ''}
                     <button id="analyzer-close-btn">&times;</button>
                 </div>
             </div>
+
+            <div id="settings-panel" class="settings-panel" style="display: none;">
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="mode-swap-toggle" ${MODE_SWAP_ENABLED ? 'checked' : ''}>
+                        <span class="setting-text">Auto Mode Swap</span>
+                    </label>
+                    <div class="setting-description">
+                        Automatically change <code>--mode=normal</code> to <code>--mode=extremely-spicy-or-crazy</code>
+                    </div>
+                </div>
+            </div>
+
             <div class="history-list">
         `;
 
@@ -463,6 +547,16 @@
         document.body.appendChild(container);
 
         document.getElementById('analyzer-close-btn').onclick = () => container.remove();
+        document.getElementById('settings-toggle-btn').onclick = toggleSettingsPanel;
+
+        // Settings toggle handler
+        const modeSwapToggle = document.getElementById('mode-swap-toggle');
+        if (modeSwapToggle) {
+            modeSwapToggle.onchange = (e) => {
+                MODE_SWAP_ENABLED = e.target.checked;
+                console.log(`🔄 Mode Swap ${MODE_SWAP_ENABLED ? 'ENABLED' : 'DISABLED'}`);
+            };
+        }
 
         if (completedGenerations.length > 0) {
             document.getElementById('view-history-btn').onclick = showHistoryUI;
@@ -504,9 +598,53 @@
 
             .analyzer-header h2 { margin: 0; font-size: 20px; font-weight: bold; }
 
-            .analyzer-controls {
-                display: flex; gap: 10px; align-items: center;
-            }
+        .analyzer-controls {
+            display: flex; gap: 10px; align-items: center;
+        }
+
+        .settings-panel {
+            display: flex; flex-direction: column; gap: 15px;
+            background-color: #2a2a2a; padding: 15px;
+            border-radius: 8px; margin-bottom: 20px;
+        }
+
+        .setting-item {
+            display: flex; flex-direction: column; gap: 8px;
+        }
+
+        .setting-label {
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer; font-weight: bold;
+        }
+
+        .setting-label input[type="checkbox"] {
+            width: 16px; height: 16px;
+            accent-color: #5ba3ff;
+        }
+
+        .setting-text {
+            color: #dcdcdc;
+        }
+
+        .setting-description {
+            font-size: 12px; color: #999; margin-left: 26px;
+        }
+
+        .setting-description code {
+            background-color: #3a3a3a; padding: 2px 6px;
+            border-radius: 3px; font-family: monospace;
+        }
+
+        .settings-btn {
+            background-color: #3a3a3a; color: #dcdcdc;
+            border: 1px solid #555; border-radius: 5px;
+            padding: 8px 12px; cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .settings-btn:hover {
+            background-color: #4a4a4a;
+        }
 
             #view-history-btn, #view-refusal-history-btn {
                 background-color: #3a3a3a; color: #dcdcdc;
@@ -664,6 +802,15 @@
                 margin: 5px 0 0 0;
             }
         `);
+    }
+
+    // --- Settings Panel Toggle ---
+    function toggleSettingsPanel() {
+        const settingsPanel = document.getElementById('settings-panel');
+        if (settingsPanel) {
+            const isVisible = settingsPanel.style.display !== 'none';
+            settingsPanel.style.display = isVisible ? 'none' : 'block';
+        }
     }
 
     // Initialize styles

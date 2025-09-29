@@ -37,11 +37,12 @@ The ultimate script for analyzing Grok's hidden video generation prompts, combin
 - Image thumbnails and metadata for each generation
 - Separate views for successful vs refused generations
 
-### 🎨 **Enhanced UI**
+### 🎨 **Enhanced UI & Settings**
 - Modern dark theme with professional styling
 - Responsive design that works on different screen sizes
 - Clear visual distinction between successful and refused generations
 - Intuitive navigation between different views
+- **⚙️ Settings Panel** with UI toggle for mode swapping
 
 ## 🔧 Installation & Usage
 
@@ -64,10 +65,15 @@ The ultimate script for analyzing Grok's hidden video generation prompts, combin
 ### Configuration
 ```javascript
 // At the top of the script, you can modify:
-const MODE_SWAP_ENABLED = true;        // Enable/disable mode swapping
+let MODE_SWAP_ENABLED = true;          // Enable/disable mode swapping (now toggleable via UI)
 const ORIGINAL_MODE = "--mode=normal"; // Mode to replace
 const TARGET_MODE = "--mode=extremely-spicy-or-crazy"; // Replacement mode
 ```
+
+### UI Toggle
+- Click the **⚙️ Settings** button in any UI panel
+- Toggle **Auto Mode Swap** on/off
+- Changes take effect immediately for new generations
 
 ## 🛠️ How It Works
 
@@ -103,7 +109,8 @@ const TARGET_MODE = "--mode=extremely-spicy-or-crazy"; // Replacement mode
 ### Mode Swapping Not Working
 1. **Check Logs**: Look for "Mode Swapper: Enhanced video mode!" in console
 2. **Verify Pattern**: Ensure your prompt contains `--mode=normal`
-3. **Disable/Enable**: Try toggling `MODE_SWAP_ENABLED` to test
+3. **Check UI Toggle**: Click ⚙️ Settings and ensure "Auto Mode Swap" is enabled
+4. **Disable/Enable**: Try toggling the setting on/off to test
 
 ## 📊 Feature Comparison
 
@@ -113,9 +120,10 @@ const TARGET_MODE = "--mode=extremely-spicy-or-crazy"; // Replacement mode
 | Image Extraction | ❌ | ✅ | ✅ |
 | Editable Prompts | ❌ | ✅ | ✅ |
 | Refusal Handling | ❌ | ✅ | ✅ |
-| Mode Swapping | ❌ | ❌ | ✅ |
+| **Mode Swapping** | ❌ | ❌ | ✅ *(with UI toggle)* |
 | History View | ❌ | ✅ | ✅ |
 | UI Reliability | ⚠️ | ✅ | ✅ |
+| **Settings Panel** | ❌ | ❌ | ✅ |
 
 ## 🎯 Use Cases
 
